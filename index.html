@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <!--<link href="style.css" rel="stylesheet" type="text/css" /> -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/navbar-top-fixed.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class = "container">
+<h1>Wagon Store</h1>
+  Starting Money: <input type="text" id="moneyBox"></input>
+  <br />
+  <p>Remaining Money:</p><p id="remaining"></p>
+  <br />
+
+</div>
+  
+  <hr>
+  
+  Which wagon? 
+  <select id="wagonChoice" onchange="chooseWagon()">
+    <option hidden disabled selected value> -- select an option -- </option>
+    <option value ="Schooner">Prairie Schooner</option>
+    <option value ="Farm">Modified Farm Wagon</option>
+  </select>
+<br />
+  Livestock: 
+  <select id="livestockType" onchange="chooseLivestock()">
+    <option hidden disabled selected value> -- select an option -- </option>
+    <option value="Oxen">Oxen teams</option>
+    <option value="Mule">Mule teams</option>buyShoe
+  </select>
+  <br />
+  <br />
+  Remaining Weight: <div id="remainingWeight">2000</div>
+
+  <br />
+  (You are required to buy at least 1 of the starred items)
+  <br />
+  *Food ($0.25 per pound): <button id="foodPlus" onclick="buyFood(1,.25,food)"class="btn btn-secondary btn-sm">+</button> <button id="foodMinus" onclick="buyFood(-1,.25,food)"class="btn btn-secondary btn-sm">-</button> <div id="food">0</div>
+  *Water Barrel ($4, 500 lbs): <button class="btn btn-secondary btn-sm" id="waterPlus" onclick="buyWater(1)">+</button>  <button class="btn btn-secondary btn-sm" id="waterMinus" onclick="buyWater(-1)">-</button> <div id="water">0</div>  
+  *Animal Feed ($0.10 per pound):  <button class="btn btn-secondary btn-sm" onclick="buyFeed(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyFeed(-1)">-</button> <div id="feed">0</div>
+  *Cooking gear ($8, 20 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyCooking(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyCooking(-1)">-</button> <div id="cooking">0</div>
+  *Tent ($7, 40 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyTent(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyTent(-1)">-</button> <div id="tent">0</div>
+  *Bedding ($5, 20 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyBedding(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyBedding(-1)">-</button> <div id="bedding">0</div>
+  Spare Axle ($20, 200 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyAxle(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyAxle(-1)">-</button> <div id="axle">0</div>
+  Spare Wagon Wheel ($25, 100 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyWheel(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyWheel(-1)">-</button> <div id="wheel">0</div>
+  Spare Wagon Wheel Spoke ($3, 5 lbs):  <button class="btn btn-secondary btn-sm" onclick="buySpoke(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buySpoke(-1)">-</button> <div id="spoke">0</div>
+  Spare lynch pins and bolts ($5, 5 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyPins(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyPins(-1)">-</button> <div id="pins">0</div>
+  Spare Yoke or harness ($10, 25 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyYoke(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyYoke(-1)">-</button> <div id="yoke">0</div>
+  Spare livestock shoe ($2, 2 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyShoe(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyShoe(-1)">-</button> <div id="shoe">0</div>
+  Spare wagon tongue ($20, 200 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyTongue(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyTongue(-1)">-</button> <div id="tongue">0</div>
+  Spare wagon cover ($20, 25 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyCover(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyCover(-1)">-</button> <div id="cover">0</div>
+  Heavy blanket ($2, 5 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyBlanket(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyBlanket(-1)">-</button> <div id="blanket">0</div>
+  Blacksmith tools ($40, 150 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyBlacksmith(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyBlacksmith(-1)">-</button> <div id="blacksmith">0</div>
+  Carpenter tools ($40, 50 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyCarpenter(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyCarpenter(-1)">-</button> <div id="carpenter">0</div>
+  Farming tools ($40, 200 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyFarmer(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyFarmer(-1)">-</button> <div id="farmer">0</div>
+  Rifle ($50, 10 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyRifle(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyRifle(-1)">-</button> <div id="rifle">0</div>
+  Chain ($5, 50 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyChain(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyChain(-1)">-</button> <div id="chain">0</div>
+  Rope ($5, 30 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyRope(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyRope(-1)">-</button> <div id="rope">0</div>
+  Pistol ($30, 5 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyPistol(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyPistol(-1)">-</button> <div id="pistol">0</div>
+  Bullets ($3 per box, 3 lbs per box):  <button class="btn btn-secondary btn-sm" onclick="buyBullets(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyBullets(-1)">-</button> <div id="bullets">0</div>
+  Seed ($10, 50 lbs):  <button class="btn btn-secondary btn-sm" onclick="buySeed(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buySeed(-1)">-</button> <div id="seed">0</div>
+  Sewing Kit ($2, 1 lb):  <button class="btn btn-secondary btn-sm" onclick="buySewing(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buySewing(-1)">-</button> <div id="sewing">0</div>
+  Sewing Machine ($25, 40 lbs):  <button class="btn btn-secondary btn-sm" onclick="buySewMachine(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buySewMachine(-1)">-</button> <div id="sewMachine">0</div>
+  Linen Cloth ($10, 20 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyCloth(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyCloth(-1)">-</button> <div id="cloth">0</div>
+  Plant Cuttings ($25, 50 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyCuttings(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyCuttings(-1)">-</button> <div id="cuttings">0</div>
+  School Books ($15, 20 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyBooks(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyBooks(-1)">-</button> <div id="books">0</div>
+  Lantern ($5, 5 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyLantern(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyLantern(-1)">-</button> <div id="lantern">0</div>
+  Iron Stove ($25, 150 lbs):  <button class="btn btn-secondary btn-sm" onclick="buyStove(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyStove(-1)">-</button> <div id="stove">0</div>
+  Banjo ($10, 5 lbs): <button class="btn btn-secondary btn-sm" onclick="buyBanjo(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyBanjo(-1)">-</button> <div id="banjo">0</div>
+  Harmonica ($2, 1 lb): <button class="btn btn-secondary btn-sm" onclick="buyHarmonica(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyHarmonica(-1)">-</button> <div id="harmonica">0</div>
+  Silverware ($10, 5 lbs): <button class="btn btn-secondary btn-sm" onclick="buySilverware(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buySilverware(-1)">-</button> <div id="silverware">0</div>
+  China ($40, 20 lbs): <button class="btn btn-secondary btn-sm" onclick="buyChina(1)">+</button>  <button class="btn btn-secondary btn-sm" onclick="buyChina(-1)">-</button> <div id="china">0</div>
+
+
+  <!-- JavaScript Files -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</body>  
+</html>
